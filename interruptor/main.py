@@ -5,14 +5,15 @@ import ujson
 from umqtt.simple import MQTTClient
 
 # Informações do WiFi
-WIFI_SSID = "Convidado"
-WIFI_PASSWORD = "12345678"
+WIFI_SSID = "SEU_NOME_DE_REDE_WIFI"
+WIFI_PASSWORD = "SUA_SENHA_WIFI"
 
-# Informações do Servidor MQTT
-MQTT_SERVER = "192.168.0.106"  # Substitua pelo IP real
+# Configurações do Broker MQTT
+MQTT_BROKER = "ENDERECO_DO_SEU_BROKER_MQTT"  # Ex: "192.168.1.100" ou "test.mosquitto.org"
 MQTT_PORT = 1883
-MQTT_USER = "usuariotest"
-MQTT_PASS = "12345678"
+MQTT_USER = "SEU_USUARIO_MQTT"  # Deixe em branco se não houver autenticação
+MQTT_PASSWORD = "SUA_SENHA_MQTT" # Deixe em branco se não houver autenticação
+MQTT_CLIENT_ID = "bitdoglab_sensor_temp_interna_pico"
 MQTT_CLIENT_ID = "picow"
 
 # Definição de tópicos MQTT
