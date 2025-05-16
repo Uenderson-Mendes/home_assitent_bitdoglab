@@ -1,0 +1,43 @@
+mqtt:
+  binary_sensor:
+    - name: "BitDogLab Botão A"
+      state_topic: "bitdoglab/button/b/state"
+      payload_on: "ON"
+      payload_off: "OFF"
+      availability:
+        - topic: "bitdoglab/io/status"
+          payload_available: "online"
+          payload_not_available: "offline"
+      unique_id: "bitdoglab_button_b_01"
+      device:
+        identifiers: ["bitdoglab_mqtt_device_01"]
+
+    - name: "BitDogLab Botão B"
+      state_topic: "bitdoglab/button/c/state"
+      payload_on: "ON"
+      payload_off: "OFF"
+      availability:
+        - topic: "bitdoglab/io/status"
+          payload_available: "online"
+          payload_not_available: "offline"
+      unique_id: "bitdoglab_button_c_01"
+      device:
+        identifiers: ["bitdoglab_mqtt_device_01"]
+
+  switch:
+    - name: "BitDogLab Buzzer"
+      command_topic: "bitdoglab/buzzer/command"
+      state_topic: "bitdoglab/buzzer/state"
+      payload_on: '{"state":"ON", "frequency":1500, "duration":0.5}'
+      payload_off: '{"state":"OFF"}'
+      state_on: "ON"
+      state_off: "OFF"
+      optimistic: false
+      availability:
+        - topic: "bitdoglab/io/status"
+          payload_available: "online"
+          payload_not_available: "offline"
+      unique_id: "bitdoglab_buzzer_switch_01"
+      device:
+        identifiers: ["bitdoglab_mqtt_device_01"]
+        sw_version: "1.0.1-io"
