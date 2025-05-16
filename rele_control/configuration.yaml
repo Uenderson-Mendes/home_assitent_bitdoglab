@@ -1,0 +1,37 @@
+mqtt:
+  switch:
+    - name: "BitDogLab Relé GPIO20"
+      unique_id: "bitdoglab_rele_gpio20_switch_01"
+      # Tópico para onde o Home Assistant envia comandos (ON/OFF/TOGGLE)
+      command_topic: "bitdoglab/rele/gpio20/set"
+      # Tópico de onde o Home Assistant lê o estado atual do relé
+      state_topic: "bitdoglab/rele/gpio20/state"
+      # Payloads que representam os estados LIGADO e DESLIGADO
+      payload_on: "ON"
+      payload_off: "OFF"
+      # Payloads que o Home Assistant envia para ligar e desligar
+      # Se omitido, HA envia payload_on e payload_off definidos acima.
+      # Para suportar o comando "TOGGLE" do Home Assistant (se o switch tiver essa opção na UI),
+      # o script do Pico já lida com "TOGGLE" no command_topic.
+      # Se quiser que o botão de toggle na UI do HA envie "TOGGLE":
+      # command_template: '{{ value_json.state if value_json.state else value_json.command if value_json.command else value }}" # Example if HA sends JSON commands
+      # Para este script, o HA enviará "ON" ou "OFF" diretamente, e o Pico lida com isso.
+      # O script do Pico também aceita "TOGGLE" se enviado diretamente para o command_topic.
+      state_on: "ON"  # Valor no state_topic que significa que o interruptor está LIGADO
+      state_off: "OFF" # Valor no state_topic que significa que o interruptor está DESLIGADO
+      optimistic: false # Define como false, pois o dispositivo (Pico) publicará seu estado real
+      availability:
+        - topic: "bitdoglab/rele/gpio20/status"
+          payload_available: "online"
+          # O script do Pico não envia "offline" explicitamente neste tópico de disponibilidade,
+          # mas o Home Assistant pode usar o Last Will and Testament (LWT) do broker MQTT
+          # ou a indisponibilidade do cliente para marcar como offline.
+          # Para uma melhor gestão de offline, o Pico poderia ser programado para enviar LWT.
+      qos: 0 # Qualidade de serviço para comandos enviados (0, 1, ou 2)
+      # retain: false # Comandos geralmente não devem ser retidos. O estado é retido pelo dispositivo.
+      device:
+        identifiers: ["bitdoglab_mqtt_device_rele_gpio20"] # Identificador único para este dispositivo
+        name: "BitDogLab Controle de Relé (GPIO20)"
+        manufacturer: "BitDogLab Community"
+        model: "Pico W com Relé e Botão B"
+        sw_version: "1.0-rele-mqtt-b"
