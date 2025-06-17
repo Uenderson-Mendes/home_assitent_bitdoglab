@@ -1,0 +1,49 @@
+mqtt:
+  switch:
+    # Relé A - GPIO 19
+    - name: "BitDogLab Relé A GPIO19"
+      unique_id: "bitdoglab_rele_gpio19_switch_01"
+      # Tópico para onde o Home Assistant envia comandos (ON/OFF/TOGGLE)
+      command_topic: "bitdoglab/rele/gpio19/set"
+      # Tópico de onde o Home Assistant lê o estado atual do relé
+      state_topic: "bitdoglab/rele/gpio19/state"
+      # Payloads que representam os estados LIGADO e DESLIGADO
+      payload_on: "ON"
+      payload_off: "OFF"
+      state_on: "ON"  # Valor no state_topic que significa que o interruptor está LIGADO
+      state_off: "OFF" # Valor no state_topic que significa que o interruptor está DESLIGADO
+      optimistic: false # Define como false, pois o dispositivo (Pico) publicará seu estado real
+      availability:
+        - topic: "bitdoglab/rele/gpio19/status"
+          payload_available: "online"
+      qos: 0 # Qualidade de serviço para comandos enviados (0, 1, ou 2)
+      device:
+        identifiers: ["bitdoglab_mqtt_device_rele_gpio19"] # Identificador único para este dispositivo
+        name: "BitDogLab Controle de Relé A (GPIO19)"
+        manufacturer: "BitDogLab Community"
+        model: "Pico W com Relé A e Botão A"
+        sw_version: "1.0-rele-mqtt-dual-a"
+
+    # Relé B - GPIO 20
+    - name: "BitDogLab Relé B GPIO20"
+      unique_id: "bitdoglab_rele_gpio20_switch_01"
+      # Tópico para onde o Home Assistant envia comandos (ON/OFF/TOGGLE)
+      command_topic: "bitdoglab/rele/gpio20/set"
+      # Tópico de onde o Home Assistant lê o estado atual do relé
+      state_topic: "bitdoglab/rele/gpio20/state"
+      # Payloads que representam os estados LIGADO e DESLIGADO
+      payload_on: "ON"
+      payload_off: "OFF"
+      state_on: "ON"  # Valor no state_topic que significa que o interruptor está LIGADO
+      state_off: "OFF" # Valor no state_topic que significa que o interruptor está DESLIGADO
+      optimistic: false # Define como false, pois o dispositivo (Pico) publicará seu estado real
+      availability:
+        - topic: "bitdoglab/rele/gpio20/status"
+          payload_available: "online"
+      qos: 0 # Qualidade de serviço para comandos enviados (0, 1, ou 2)
+      device:
+        identifiers: ["bitdoglab_mqtt_device_rele_gpio20"] # Identificador único para este dispositivo
+        name: "BitDogLab Controle de Relé B (GPIO20)"
+        manufacturer: "BitDogLab Community"
+        model: "Pico W com Relé B e Botão B"
+        sw_version: "1.0-rele-mqtt-dual-b"
