@@ -6,15 +6,15 @@ from machine import Pin, PWM
 from umqtt.simple import MQTTClient
 import json
 
-# Configurações de Rede Wi-Fi
-WIFI_SSID = "Convidado"
-WIFI_PASSWORD = "12345678"
+# Informações do WiFi
+WIFI_SSID = "SEU_NOME_DE_REDE_WIFI"
+WIFI_PASSWORD = "SUA_SENHA_WIFI"
 
 # Configurações do Broker MQTT
-MQTT_BROKER = "192.168.0.106"
+MQTT_BROKER = "ENDERECO_DO_SEU_BROKER_MQTT"  # Ex: "192.168.1.100" ou "test.mosquitto.org"
 MQTT_PORT = 1883
-MQTT_USER = "usuariotest"
-MQTT_PASSWORD = "12345678"
+MQTT_USER = "SEU_USUARIO_MQTT"  # Deixe em branco se não houver autenticação
+MQTT_PASSWORD = "SUA_SENHA_MQTT" # Deixe em branco se não houver autenticação
 MQTT_CLIENT_ID = "bitdoglab_io_controller"
 
 # Tópicos MQTT
