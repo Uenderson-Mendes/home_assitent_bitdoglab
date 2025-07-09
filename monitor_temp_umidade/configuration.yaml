@@ -1,23 +1,9 @@
-mqtt:
-  sensor:
-    - name: "Temperatura Interna BitDogLab (Pico)"
-      state_topic: "bitdoglab/sensor/temperatura_interna"
-      unit_of_measurement: "°C"
-      device_class: "temperature"
-      value_template: "{{ value | float | round(1) }}"
-      availability:
-        - topic: "bitdoglab/status/temp_interna_sensor"
-          payload_available: "online"
-          payload_not_available: "offline"
-      # Se você implementar um payload de erro específico no Pico, pode adicionar aqui:
-      #   - topic: "bitdoglab/status/temp_interna_sensor"
-      #     payload_available: "online"
-      #     payload_not_available: "error_reading_sensor"
-      unique_id: "bitdoglab_pico_internal_temp_01"
-      device:
-        identifiers: ["bitdoglab_mqtt_device_pico_internal"]
-        name: "BitDogLab Sensor (Interno Pico)"
-        manufacturer: "BitDogLab Community / Raspberry Pi"
-        model: "Pico W (Sensor Interno)"
-        sw_version: "1.2-internal-temp"
+binary_sensor:
+  - platform: mqtt
+    name: "Umidade do Solo"
+    state_topic: "homeassistant/binary_sensor/umidade_solo/state"
+    payload_on: "0"
+    payload_off: "1"
+    device_class: moisture
+    unique_id: umidade_solo_digital
 
