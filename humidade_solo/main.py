@@ -9,16 +9,19 @@ WIFI_SSID = "rede"
 WIFI_PASSWORD = "internet"
 
 # --- Configurações MQTT ---
-MQTT_BROKER = "192.168.0.100"
+MQTT_BROKER = "Seu IP ou URL do Broker MQTT"
 MQTT_PORT = 1883
-MQTT_USER = "baiano"
-MQTT_PASSWORD = "baiano123"
+MQTT_USER = "seu_usuario_mqtt"
+MQTT_PASSWORD = "sua_senha_mqtt"
 MQTT_CLIENT_ID = "sensor_umidade_solo"
 MQTT_TOPIC = "homeassistant/binary_sensor/umidade_solo/state"
 MQTT_CONFIG_TOPIC = "homeassistant/binary_sensor/umidade_solo/config"
 
-# --- Pino do Sensor ---
-sensor_umidade_digital = Pin(8, Pin.IN, Pin.PULL_UP)
+# --- Pinos ---
+sensor_umidade_digital = Pin(8, Pin.IN, Pin.PULL_UP)  # Sensor
+rele = Pin(20, Pin.OUT)  # Relé no GPIO 20
+
+# Define o estado de solo úmido
 LIMIAR_DIGITAL_UMIDO = 0
 
 def conectar_wifi():
@@ -90,8 +93,12 @@ while True:
 
         if estado_digital == LIMIAR_DIGITAL_UMIDO:
             print("  💧 Solo: ÚMIDO")
+            rele.value(0)  # Desliga o relé
+            print("  🔌 Relé DESLIGADO (sem irrigação)")
         else:
             print("  🔥 Solo: SECO")
+            rele.value(1)  # Liga o relé
+            print("  🔌 Relé LIGADO (irrigação ativa)")
 
         if estado_digital != ultimo_estado_digital:
             payload = b"1" if estado_digital == 1 else b"0"
